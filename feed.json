@@ -1,10 +1,13 @@
 {
   "schema_version": 1,
   "date": "2026-11-04",
-  "status": "setup",
+  "status": "published",
   "weather": "",
   "tasks": [],
-  "news": "",
-  "idea": "AlexJen Vet: продумать единый экран записи в ветклинику, груминг и зоогостиницу.",
+  "news": {
+    "title": "Новость проекта: веб-газета «Утро Жени» подключена к GitHub.",
+    "url": "https://github.com/sssneer124-maker/utro-zheni-feed."
+  },
+  "idea": "AlexJen Vet: разработать единый экран онлайн-записи для ветклиники, груминга и гостиницы.",
   "updated_at": "2026-11-04T14:40:00+03:00"
 }
