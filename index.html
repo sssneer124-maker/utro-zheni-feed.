@@ -69,7 +69,8 @@ a{color:#884658} @media(max-width:650px){.mast{padding:24px 14px 34px;min-height
 <section class="section pink"><div class="eyebrow">08 / Вдохновение для будущего</div><h2>AlexJen Vet</h2><div class="project"><div class="phone" id="projectVisual" aria-label="Рисованная схема мобильного приложения"><div class="paw">🐾</div><div class="phbrand">AlexJen Vet</div><div class="phline">Ветклиника</div><div class="phline">Груминг</div><div class="phbutton">ЗАПИСАТЬСЯ</div></div><div><p id="idea">Новая полезная идея для проекта.</p><p class="small" id="ideaCaption">Концепция интерфейса</p></div></div></section>
 </div>
 <div class="goldline"></div>
-<section class="section" style="background:#fffbf7"><div class="eyebrow" style="text-align:center">09 / Мир, Россия, экономика и наука</div><h2 class="news-title">Новости к кофе</h2><p class="news-sub">Не только что произошло, но и почему это важно</p><div class="newsgrid" id="news"><div class="newsitem">Новости появятся после проверки сегодняшнего выпуска.</div></div></section>
+<section class="section" style="background:#fffbf7"><div class="eyebrow" style="text-align:center">09 / Мир, Россия, экономика и наука</div><h2 class="news-title">Новости к кофе</h2><p class="news-sub">Не только что произошло, но и почему это важно</p><div class="newsgrid" id="news"><div class="newsitem">Новости появятся после проверки сегодняшнего выпуска.</div></div>
+<div style="margin-top:22px;padding:17px;border-radius:13px;background:#f5e7e2;border-left:3px solid #bd9257"><div class="eyebrow">Тема крупным планом · 2 минуты чтения</div><h2 id="deepTitle" style="font-size:27px">Разбор дня</h2><div id="deepBody" style="font-size:13px;line-height:1.85;color:#4f3340">Интересное объяснение важной новости появится здесь.</div><div id="deepSources" style="font-size:11px;margin-top:10px"></div></div></section>
 <div class="goldline"></div>
 <section class="section pink"><div class="eyebrow">10 / Маленькая мысль</div><div class="quote" id="quote">«Не каждому утру нужен подвиг. Иногда достаточно хорошего начала».</div></section>
 <div class="goldline"></div>
@@ -162,6 +163,7 @@ async function load(){
  $('quote').textContent=str(f.editorial&&f.editorial.quote,'«Даже небольшое открытие может изменить твой день».');
  let items=Array.isArray(f.news_digest)?f.news_digest:[];
  if(!items.length&&f.news){const v=f.news;items=[typeof v==='string'?{title:v}:{title:v.title,url:v.url}];}
+const dd=f.deep_dive||{};$('deepTitle').textContent=str(dd.title,'Разбор важной темы');const paras=Array.isArray(dd.paragraphs)?dd.paragraphs:[];$('deepBody').innerHTML=paras.map(p=>'<p>'+safe(p)+'</p>').join('')||'<p>Объяснение появится в следующем выпуске.</p>';const src=Array.isArray(dd.sources)?dd.sources:[];$('deepSources').innerHTML=src.filter(v=>v&&typeof v.url==='string'&&v.url.startsWith('https://')).map(v=>'<a href="'+safe(v.url)+'" target="_blank" rel="noopener noreferrer">'+safe(v.name||'Источник')+'</a>').join(' · ');
  $('news').innerHTML=items.map((n)=>{
   const u=typeof n.url==='string'&&/^https:\/\//.test(n.url)?n.url:'';
   return '<div class="newsitem">'+newsArt(n.category||'Новости')+'<div class="eyebrow" style="margin-top:10px">'+safe(n.category||'Новости')+'</div><h3>'+safe(n.title||'Без названия')+'</h3><div class="source">'+safe(n.source||'')+(n.date?' · '+safe(n.date):'')+'</div><p>'+safe(n.summary||'Читайте подробности в источнике.')+'</p>'+(u?'<a href="'+safe(u)+'" target="_blank" rel="noopener noreferrer">Открыть источник ↗</a>':'')+'</div>';
