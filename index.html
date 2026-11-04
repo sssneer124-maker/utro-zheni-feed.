@@ -1,42 +1,153 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#FCF8F0"><title>Утро Жени · газета</title>
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#470f25">
+<title>Утро Жени — Daily Paper</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  *{box-sizing:border-box}body{margin:0;padding:28px 14px;background:#3d1520;color:#34271f;font-family:ui-serif,Georgia,'Times New Roman',serif}
-  article{max-width:720px;margin:0 auto;background:#fcf8f0;border-radius:27px;padding:clamp(24px,5vw,48px);min-height:82vh;box-shadow:0 18px 64px #1b060933}
-  .eyebrow{color:#9f7742;font-size:13px;font-weight:bold;letter-spacing:1.8px;font-family:system-ui,sans-serif}.date{font-size:clamp(45px,8vw,72px);font-weight:700;line-height:1.15;margin:26px 0 0}
-  .meta{font-size:17px;color:#817669;margin-top:5px}h2{font-family:system-ui,sans-serif;font-size:14px;letter-spacing:1px;color:#9f7742;text-transform:uppercase;margin-top:34px}
-  p,li{font-size:19px;line-height:1.48}li{padding:5px 0}ul{padding-left:27px}hr{border:0;border-top:1px solid #dfd1c0;margin:32px 0}footer{font-family:system-ui,sans-serif;font-size:12px;color:#817669}
-  .subtle{color:#817669}a{color:#936636}
-</style>
-</head>
-<body><article>
-  <div class="eyebrow">УТРО ЖЕНИ &nbsp;/&nbsp; DAILY PAPER</div>
-  <div id="date" class="date">Электронная газета</div><div id="meta" class="meta">Лиски · персональный выпуск</div>
-  <h2>Планы и задачи</h2><div id="tasks"><p class="subtle">Проверяю свежий выпуск…</p></div>
-  <h2>Новость дня</h2><p id="news" class="subtle">Нет опубликованной новости</p>
-  <h2>Идея для AlexJen Vet</h2><p id="idea" class="subtle">Нет опубликованной идеи</p>
-  <hr><footer id="foot">Здесь будет появляться новая газета после публикации файла feed.json.</footer>
-</article>
+:root{--wine:#4f152b;--dark:#321623;--wine2:#723347;--rose:#eac4cb;--dust:#bc8594;--paper:#fff9f0;--cream:#f5eadb;--gold:#bd9257;--ink:#3e262a;--muted:#8b7174}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;padding:22px 10px 90px;color:var(--ink);background:radial-gradient(circle at top left,#8a485d 0,transparent 34%),radial-gradient(circle at bottom right,#793a4c 0,transparent 35%),#3b1326;font-family:Manrope,system-ui,sans-serif}
+.paper{margin:auto;max-width:900px;position:relative;overflow:hidden;background:linear-gradient(115deg,#fffbf2,#f8eee8 60%,#fff8ed);border-radius:26px;box-shadow:0 26px 80px #1b061a99;border:1px solid #dcbb9a}
+.paper:before{content:"";position:absolute;inset:0;opacity:.38;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' opacity='.065' filter='url(%23n)'/%3E%3C/svg%3E")}
+.mast{min-height:310px;background:radial-gradient(circle at 75% -25%,#884458,#4c142c 60%,#320c1f);padding:26px 28px 36px;text-align:center;position:relative;overflow:hidden;color:#f8e4ca}
+.mast:after{content:"";position:absolute;bottom:12px;left:27px;right:27px;border-bottom:1px solid #d6af7d80}
+.kicker{position:relative;z-index:1;font-size:10px;letter-spacing:4px;text-transform:uppercase;font-weight:700;color:#eccbaa}
+.bigdate{position:relative;z-index:1;font-family:'Great Vibes','Snell Roundhand','Brush Script MT',cursive;color:#f7dba0;font-size:clamp(89px,20vw,160px);line-height:.88;margin:19px 0 0;text-shadow:0 2px 0 #3b1220,0 0 25px #bd925766}
+.month{font:600 clamp(23px,5vw,35px)/1.1 'Cormorant Garamond',serif;color:#e5b789;letter-spacing:3px;margin:5px 0 3px}
+.greeting{position:relative;z-index:1;font-family:'Great Vibes','Snell Roundhand','Brush Script MT',cursive;font-size:clamp(34px,7vw,54px);line-height:1.25;color:#ffdfba;margin:11px 0 0}
+.dateline{position:relative;z-index:1;font-size:11px;letter-spacing:2px;margin-top:11px;color:#e6b9b6}
+.flower{position:absolute;opacity:.85;pointer-events:none}
+.flower.left{left:-11px;top:-2px;transform:rotate(-16deg)}.flower.right{right:-14px;top:3px;transform:scaleX(-1) rotate(-16deg)}
+.flower path,.flower line{fill:none;stroke:#dcb79f;stroke-width:1.9;stroke-linecap:round}.flower circle{fill:#f5d9cc;stroke:#e9b7c1;stroke-width:1}
+.main{padding:24px clamp(17px,4vw,44px) 45px;position:relative}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:17px}
+.section{background:#fffaf3de;border:1px solid #e3cec0;border-radius:17px;padding:20px;box-shadow:0 5px 22px #6d33410a}
+.section.dark{background:linear-gradient(150deg,#5f1f37,#361321);color:#fae5d5;border:1px solid #a46d70}
+.section.pink{background:linear-gradient(140deg,#f9e7e5,#fffaf3)}
+.section h2,.news-title{font:700 27px/1 'Cormorant Garamond',serif;color:#71304a;margin:0 0 12px}
+.section.dark h2{color:#eed0ae}
+.section p{font-size:13px;line-height:1.75;margin:7px 0}
+.eyebrow{font-size:10px;color:#a27772;font-weight:800;text-transform:uppercase;letter-spacing:1.8px;margin-bottom:8px}
+.goldline{height:1px;background:linear-gradient(90deg,transparent,#b78a58 50%,transparent);margin:22px 0}
+.weather{display:flex;align-items:center;justify-content:space-between;gap:12px}.degree{font:600 65px/1 'Cormorant Garamond',serif;color:#4e2232}.place{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#957271}.small{color:var(--muted);font-size:12px;line-height:1.6}
+.panelhead{display:flex;align-items:center;gap:12px;margin-bottom:13px}.panelhead .glyph{font-size:30px}.panelhead h2{margin:0}
+.leo{font-size:43px;float:right;margin-left:12px}
+.tarotwrap{display:grid;grid-template-columns:130px 1fr;gap:16px;align-items:center}
+.tarotpic{width:130px;aspect-ratio:2/3;display:block;filter:drop-shadow(0 4px 7px #6c334533)}
+.numberbig{font:400 105px/1 'Great Vibes','Snell Roundhand',cursive;color:#f5d096;text-shadow:0 1px 15px #caa87555;text-align:center}
+.numberwrap{display:grid;grid-template-columns:110px 1fr;gap:14px;align-items:center}
+.kidnum{color:#ebccae;font-size:12px;text-align:center;letter-spacing:1px}
+.english{font:italic 36px/1.2 'Cormorant Garamond',serif;color:#6d2a45;margin:12px 0}.divider{border:0;border-top:1px solid #e7ced1;margin:13px 0}
+.tags{display:flex;gap:7px;flex-wrap:wrap}.tag{display:inline-block;border:1px solid #b88f85;color:#7e4a50;border-radius:40px;padding:6px 10px;font-size:10px;letter-spacing:.3px}
+.taskblank{font-size:12px;color:#79565a}
+.project{display:flex;gap:22px;align-items:center}.phone{width:144px;flex-shrink:0;background:#49302d;border:6px solid #4a2b27;border-radius:20px;padding:12px 8px;background:linear-gradient(150deg,#fcf8ee,#f7dfe0);min-height:190px;box-shadow:0 12px 18px #2f182829;text-align:center;color:#51312d}.phbrand{font:700 16px 'Cormorant Garamond',serif;color:#814651}.phbutton{margin-top:11px;padding:8px 4px;background:#6c3248;border-radius:8px;color:#f7e7de;font-size:9px}.phline{margin-top:7px;padding:7px 3px;background:#f3e8e1;border-radius:7px;font-size:9px}.paw{font-size:32px}
+.news-title{text-align:center;font-size:39px;margin:0}.news-sub{text-align:center;font-size:11px;color:#966977;margin:6px 0 20px;letter-spacing:1px;text-transform:uppercase}
+.newsgrid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.newsitem{border-top:2px solid #c99f7e;padding:12px 8px 4px;min-width:0}.newsitem h3{font:700 23px/1.2 'Cormorant Garamond',serif;margin:6px 0;color:#522c37}.newsitem p{font-size:12px;line-height:1.7;margin:5px 0}.newsitem a{font-size:10px;color:#8b5968;text-decoration:underline;text-underline-offset:3px}.source{font-size:10px;letter-spacing:.4px;color:#9b7b7e}.quote{text-align:center;font:italic 26px/1.35 'Cormorant Garamond',serif;color:#79394c;padding:12px 8px}.comicmeta{margin-bottom:13px;color:#9c7280;font-size:11px}.comicgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.panel{position:relative;background:linear-gradient(#eed0d0,#f8e8db);border:1px solid #b38c80;border-radius:12px;overflow:hidden;min-height:180px}.panel.fashion{background:linear-gradient(#c8899e,#f2d3ce)}.panel.cozy{background:linear-gradient(#eee0ce,#cfa5a1)}.panel.funny{background:linear-gradient(#f0b9c9,#f7e5ce)}
+.bubble{margin:8px 7px 0;border-radius:10px 10px 9px 2px;background:#fff9f1;box-shadow:0 2px 4px #8d657420;font-size:10px;line-height:1.35;padding:7px;position:relative;z-index:1}
+.portrait{position:absolute;bottom:-9px;left:50%;width:91%;max-width:145px;transform:translateX(-50%)}
+.footer{text-align:center;margin-top:33px;border-top:1px solid #dec9c5;padding-top:18px;color:#8a6b6e;font-size:10px;line-height:1.65}
+.warning{background:#ffecc9;color:#6a4034;font-size:12px;padding:8px 12px;border-radius:11px;margin:12px 0}
+a{color:#884658} @media(max-width:650px){.mast{padding:24px 14px 34px;min-height:262px}.flower{width:90px!important;height:125px!important}.grid,.newsgrid{grid-template-columns:1fr}.main{padding:17px 15px 30px}.section{padding:16px}.tarotwrap{grid-template-columns:113px 1fr}.tarotpic{width:113px}.comicgrid{grid-template-columns:repeat(2,1fr)}.panel{min-height:195px}.project{gap:12px}.phone{width:120px}.bigdate{font-size:112px}.news-title{font-size:36px}}
+</style></head>
+<body><article class="paper">
+<header class="mast">
+<svg class="flower left" viewBox="0 0 150 190" width="150" height="190" aria-hidden="true"><path d="M8 190Q47 108 95 12M28 156Q20 96 15 50M54 117Q91 103 137 67M80 58Q57 35 48 7M56 132Q108 129 143 103"/><g><circle cx="95" cy="12" r="5"/><circle cx="83" cy="24" r="4"/><circle cx="108" cy="23" r="4"/><circle cx="15" cy="50" r="5"/><circle cx="7" cy="66" r="4"/><circle cx="26" cy="65" r="4"/><circle cx="48" cy="7" r="5"/><circle cx="39" cy="21" r="4"/><circle cx="62" cy="19" r="4"/><circle cx="137" cy="67" r="5"/><circle cx="124" cy="54" r="4"/><circle cx="143" cy="79" r="4"/><circle cx="143" cy="103" r="5"/><circle cx="132" cy="93" r="4"/></g></svg>
+<svg class="flower right" viewBox="0 0 150 190" width="150" height="190" aria-hidden="true"><path d="M8 190Q47 108 95 12M28 156Q20 96 15 50M54 117Q91 103 137 67M80 58Q57 35 48 7M56 132Q108 129 143 103"/><g><circle cx="95" cy="12" r="5"/><circle cx="83" cy="24" r="4"/><circle cx="108" cy="23" r="4"/><circle cx="15" cy="50" r="5"/><circle cx="7" cy="66" r="4"/><circle cx="26" cy="65" r="4"/><circle cx="48" cy="7" r="5"/><circle cx="39" cy="21" r="4"/><circle cx="62" cy="19" r="4"/><circle cx="137" cy="67" r="5"/><circle cx="124" cy="54" r="4"/><circle cx="143" cy="79" r="4"/><circle cx="143" cy="103" r="5"/></g></svg>
+<div class="kicker">Утро Жени &nbsp; ✦ &nbsp; Daily Paper</div><div class="bigdate" id="day">4</div><div class="month" id="month">ноября</div>
+<div class="greeting" id="greet">Доброе утро ♡</div><div class="dateline" id="weekday">Среда · Лиски</div>
+</header>
+<div class="main">
+<div id="stale"></div>
+<div class="grid">
+<section class="section pink"><div class="eyebrow">01 / Первые минуты</div><h2>Утро за окном ☁</h2><div class="weather"><div><div class="degree" id="temperature">—°</div><div class="small" id="weather">Проверяю погоду в Лисках…</div><div class="small" id="sun"></div></div><div class="place">📍 Лиски<br>Воронежская область</div></div></section>
+<section class="section"><div class="eyebrow">02 / От редакции с любовью</div><h2>Письмо за утренним кофе</h2><p id="message">Здесь появится маленькое послание, которое приятно прочитать перед началом дня.</p></section>
+<section class="section dark"><div class="eyebrow" style="color:#d7b5a1">03 / Звёздная рубрика</div><div class="leo">♌</div><h2>Гороскоп для Льва</h2><p id="horoscope">Лёгкая астрологическая рубрика о настроении и возможностях дня.</p><div class="small" style="color:#d4b8b9">Развлекательная интерпретация</div></section>
+<section class="section"><div class="eyebrow">04 / Символика и вдохновение</div><h2>Карта дня</h2><div class="tarotwrap"><div id="tarotArt"></div><div><div class="eyebrow" id="tarotname">Таро</div><p id="tarottext">Образ дня как повод задуматься о важном.</p><div class="small">Символическая трактовка</div></div></div></section>
+<section class="section dark"><div class="eyebrow" style="color:#d6b19c">05 / Нумерология</div><h2>Цифра дня</h2><div class="numberwrap"><div><div class="numberbig" id="number">7</div><div class="kidnum">число дня</div></div><div><p id="numbermeaning">Символическое значение числа.</p></div></div><hr class="divider"><h2 style="font-size:22px">Карта числа</h2><div class="tarotwrap"><div id="numberArt"></div><p id="numbertarot" style="color:#fae2d2">Аркан, связанный с числом.</p></div></section>
+<section class="section pink"><div class="eyebrow">06 / A little English every day</div><h2>Английская фраза дня</h2><div class="english" id="phrase">I'll figure it out.</div><p><b>Перевод:</b> <span id="translation">Я разберусь.</span></p><p><b>Когда использовать:</b> <span id="usage">Когда спокойно обещаешь найти решение.</span></p><p id="dialogue" class="small"></p></section>
+<section class="section"><div class="eyebrow">07 / Мой день</div><h2>Планы и маленькие победы</h2><p class="taskblank" id="tasks">Личные планы остаются в приватной газете на почте.</p></section>
+<section class="section pink"><div class="eyebrow">08 / Вдохновение для будущего</div><h2>AlexJen Vet</h2><div class="project"><div class="phone" aria-label="Рисованная схема мобильного приложения"><div class="paw">🐾</div><div class="phbrand">AlexJen Vet</div><div class="phline">Ветклиника</div><div class="phline">Груминг</div><div class="phbutton">ЗАПИСАТЬСЯ</div></div><div><p id="idea">Новая полезная идея для проекта.</p><p class="small" id="ideaCaption">Концепция интерфейса</p></div></div></section>
+</div>
+<div class="goldline"></div>
+<section class="section" style="background:#fffbf7"><div class="eyebrow" style="text-align:center">09 / Мир, Россия, экономика и наука</div><h2 class="news-title">Новости к кофе</h2><p class="news-sub">Не только что произошло, но и почему это важно</p><div class="newsgrid" id="news"><div class="newsitem">Новости появятся после проверки сегодняшнего выпуска.</div></div></section>
+<div class="goldline"></div>
+<section class="section pink"><div class="eyebrow">10 / Маленькая мысль</div><div class="quote" id="quote">«Не каждому утру нужен подвиг. Иногда достаточно хорошего начала».</div></section>
+<div class="goldline"></div>
+<section class="section"><div class="eyebrow">11 / Немного смеха</div><h2>Мини-комикс дня ♡</h2><div class="comicmeta" id="comicstyle">Четыре иллюстрированные сценки · стиль меняется ежедневно</div><div id="comic" class="comicgrid"></div><p class="small" style="margin-top:14px">Персонаж в публичной версии — рисованный образ, не загруженные личные фотографии.</p></section>
+<div class="footer" id="foot">Утро Жени · Веб-газета · Данные обновляются ежедневно</div>
+</div></article>
 <script>
-(async function(){
-try {
-  const response=await fetch('feed.json?ts='+Math.floor(Date.now()/1800000),{cache:'no-store'});
-  if(!response.ok)throw new Error('Файл недоступен');
-  const f=await response.json();
-  if(!/^\d{4}-\d{2}-\d{2}$/.test(f.date||'')) throw new Error('Неверная дата');
-  const dt=new Date(f.date+'T12:00:00+03:00');
-  document.getElementById('date').textContent=new Intl.DateTimeFormat('ru-RU',{day:'numeric',month:'long'}).format(dt);
-  document.getElementById('meta').textContent=new Intl.DateTimeFormat('ru-RU',{weekday:'long'}).format(dt)+' · Лиски';
-  const taskArea=document.getElementById('tasks');taskArea.replaceChildren();
-  const tasks=Array.isArray(f.tasks)?f.tasks:[];
-  if(tasks.length){const ul=document.createElement('ul');tasks.forEach(v=>{const li=document.createElement('li');li.textContent=typeof v==='string'?v:v.title||'';ul.append(li)});taskArea.append(ul)}
-  else{const p=document.createElement('p');p.className='subtle';p.textContent=f.status==='setup'?'Публикация настраивается':'Личные планы остаются в закрытой газете на почте';taskArea.append(p)}
-  const news=typeof f.news==='string'?f.news:f.news?.title||'';document.getElementById('news').textContent=news||'Нет опубликованной новости';
-  document.getElementById('idea').textContent=f.idea||'Нет опубликованной идеи';
-  document.getElementById('foot').textContent='Утро Жени · '+(f.updated_at?'Обновлено: '+f.updated_at:'Ожидается первый выпуск');
-}catch(e){document.getElementById('tasks').textContent='Не удалось загрузить газету: '+e.message}
+(function(){
+const base='https://raw.githubusercontent.com/sssneer124-maker/utro-zheni-feed./main/feed.json';
+const $=(id)=>document.getElementById(id);
+const safe=(s)=>String(s===null||s===undefined?'':s).replace(/[&<>"']/g,(c)=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const str=(s,f='')=>typeof s==='string'?s:f;
+const tarotNames={1:'Маг',2:'Верховная Жрица',3:'Императрица',4:'Император',5:'Иерофант',6:'Влюблённые',7:'Колесница',8:'Сила',9:'Отшельник'};
+const tarotIcons={Маг:'✧','Верховная Жрица':'☾','Императрица':'❀','Император':'♛','Иерофант':'✥','Влюблённые':'♡','Колесница':'✦','Сила':'♌','Отшельник':'✧'};
+function tarotCard(name,number,light){
+const bg=light?'#52273b':'#51203a', trim='#dcb47a', icon=tarotIcons[name]||'✧';
+return '<svg class="tarotpic" viewBox="0 0 160 240" role="img" aria-label="Иллюстрация карты '+safe(name)+'"><defs><linearGradient id="a'+safe(number)+'" x2="1" y2="1"><stop stop-color="'+bg+'"/><stop offset="1" stop-color="#98717c"/></linearGradient></defs><rect x="1" y="1" width="158" height="238" rx="10" fill="url(#a'+safe(number)+')" stroke="'+trim+'" stroke-width="2"/><rect x="9" y="10" width="142" height="220" rx="6" fill="none" stroke="'+trim+'"/><path d="M31 199Q7 147 35 91M129 199Q153 147 125 91" fill="none" stroke="'+trim+'" stroke-width="2"/><path d="M31 131l-12 -17m12 38l-18 -11m15 31l-16 -3M129 131l12 -17m-12 38l18 -11m-15 31l16 -3" stroke="'+trim+'" stroke-width="2"/><circle cx="80" cy="115" r="39" fill="none" stroke="'+trim+'" stroke-width="2"/><text x="80" y="138" font-family="Georgia" font-size="66" fill="#f7d9ae" text-anchor="middle">'+icon+'</text><text x="80" y="33" font-family="Georgia" fill="'+trim+'" font-size="17" text-anchor="middle">'+safe(number)+'</text><text x="80" y="211" font-size="12" font-weight="bold" fill="#f8e6ce" text-anchor="middle">'+safe(name)+'</text></svg>';
+}
+function avatar(i,style){
+ const hair=style==='fashion comic'?'#8c4a38':'#9d6145';
+ const clothes=style==='cute/chibi'?'#b26283':style==='fashion comic'?'#5a233c':style==='cozy diary'?'#a27780':'#5e4259';
+ const glasses=i===3?'<path d="M36 73h38m9 0h38" stroke="#38232c" stroke-width="6"/><rect x="40" y="64" width="34" height="20" rx="5" fill="#4f303e"/><rect x="83" y="64" width="34" height="20" rx="5" fill="#4f303e"/>':'';
+ return '<svg class="portrait" viewBox="0 0 160 160" aria-hidden="true"><path d="M12 161Q25 111 57 113Q84 102 110 113Q144 115 149 161" fill="'+clothes+'"/><path d="M46 112Q24 93 32 47Q34 9 78 11Q132 10 131 61Q141 110 114 122L106 96H58Z" fill="'+hair+'"/><ellipse cx="80" cy="76" rx="39" ry="49" fill="#edb59c"/><path d="M40 57Q43 16 81 20Q116 20 124 60L117 48Q88 41 73 27Q56 48 40 57" fill="'+hair+'"/><path d="M53 69Q63 63 71 69M89 69Q98 64 110 69" fill="none" stroke="#5c3235" stroke-width="2.5"/><circle cx="63" cy="72" r="3.2" fill="#412830"/><circle cx="100" cy="72" r="3.2" fill="#412830"/><path d="M79 75L77 90Q81 92 85 89" fill="none" stroke="#bb7e76"/><path d="M69 101Q81 '+(i===0?'104':'110')+' 95 101" fill="none" stroke="#a35a63" stroke-width="3" stroke-linecap="round"/>'+glasses+'</svg>';
+}
+function setComic(c,date){
+ const styles=['cute/chibi','fashion comic','cozy diary','funny everyday'];
+ const origin=Date.UTC(2026,10,5), now=Date.parse(date+'T00:00:00Z');
+ const style=styles[((Math.round((now-origin)/86400000)%4)+4)%4];
+ const s=c&&styles.includes(c.style)?c.style:style;
+ $('comicstyle').textContent={'cute/chibi':'Милая мини-история','fashion comic':'Модный журнал и ирония','cozy diary':'Уютный дневник','funny everyday':'Повседневная комедия'}[s]+' · 4 кадра';
+ const defaults=['План: проснуться красивой.','Кофе: мой самый надёжный помощник.','Сегодня сделаю одно важное дело.','А потом заслуженный уют ♡'];
+ const arr=Array.isArray(c&&c.panels)&&c.panels.length>=4?c.panels:defaults;
+ $('comic').innerHTML=arr.slice(0,4).map((txt,i)=>'<div class="panel '+(s==='fashion comic'?'fashion':s==='cozy diary'?'cozy':s==='funny everyday'?'funny':'')+'"><div class="bubble">'+safe(txt)+'</div>'+avatar(i,s)+'</div>').join('');
+}
+async function weather(){
+ try{const u='https://api.open-meteo.com/v1/forecast?latitude=50.9841&longitude=39.5154&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset&timezone=Europe%2FMoscow&forecast_days=1';
+ const r=await fetch(u);if(!r.ok)throw Error('api');const a=await r.json();const n=Math.round(a.current.temperature_2m);
+ const code=a.current.weather_code;
+ $('temperature').textContent=(n>0?'+':'')+n+'°';
+ $('weather').textContent=(code>=95?'Гроза':code>=80?'Ливни':code>=61?'Дождь':code>=51?'Морось':code>=45?'Туман':code>=3?'Облачно':code>=1?'Переменная облачность':'Ясно')+' · '+Math.round(a.daily.temperature_2m_min[0])+'…'+Math.round(a.daily.temperature_2m_max[0])+'°';
+ const time=(v)=>typeof v==='string'?v.slice(11,16):'';
+ $('sun').textContent='Восход '+time(a.daily.sunrise[0])+' · Закат '+time(a.daily.sunset[0]);
+ }catch(e){ $('weather').textContent='Погода временно недоступна'; }
+}
+async function load(){
+ try{
+ const r=await fetch(base+'?v='+Math.floor(Date.now()/900000),{cache:'no-store'});if(!r.ok)throw Error('нет подключения');
+ const f=await r.json();if(!/^\d{4}-\d{2}-\d{2}$/.test(f.date||''))throw Error('формат даты');
+ const date=new Date(f.date+'T12:00:00+03:00'), day=Number(f.date.slice(8));
+ $('day').textContent=day;
+ $('month').textContent=new Intl.DateTimeFormat('ru-RU',{month:'long'}).format(date);
+ $('weekday').textContent=new Intl.DateTimeFormat('ru-RU',{weekday:'long'}).format(date)+' · Лиски · '+f.date.slice(0,4);
+ $('greet').textContent=str(f.greeting,'Доброе утро ♡');
+ const today=new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Moscow',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+ if(today!==f.date)$('stale').innerHTML='<div class="warning">Это архив выпуска за '+safe(f.date)+'. Новый ещё не опубликован.</div>';
+ $('message').textContent=str(f.editorial&&f.editorial.message,'Сегодня достаточно сделать один небольшой шаг к тому, что действительно важно.');
+ $('horoscope').textContent=str(f.horoscope&&f.horoscope.text,'Авторский развлекательный прогноз появится в следующем выпуске.');
+ const t=f.tarot||{};$('tarotname').textContent=str(t.name,'Императрица');$('tarottext').textContent=str(t.meaning,'Сегодня полезно бережно относиться к своим ресурсам.');$('tarotArt').innerHTML=tarotCard(str(t.name,'Императрица'),'III',false);
+ const raw=f.date.replace(/-/g,'').split('').map(Number).reduce((a,b)=>a+b,0);const nr=1+(raw-1)%9;
+ const n=f.number_day||{};const number=Number.isInteger(n.value)&&n.value>=1&&n.value<=9?n.value:nr;
+ $('number').textContent=number;$('numbermeaning').textContent=str(n.meaning,'Символическая тема дня: наблюдение и выбор.');
+ const tn=tarotNames[number];$('numbertarot').textContent=str(n.tarot_name,tn)+'. '+str(n.tarot_meaning,'Образ для размышления.');$('numberArt').innerHTML=tarotCard(tn,['','I','II','III','IV','V','VI','VII','VIII','IX'][number],true);
+ const en=f.english||{};$('phrase').textContent=str(en.phrase,"I'll figure it out.");$('translation').textContent=str(en.translation,'Я разберусь.');$('usage').textContent=str(en.when,'Когда хочешь сказать, что найдёшь решение.');
+ $('dialogue').textContent=str(en.dialogue,'');
+ $('tasks').textContent='Личные планы только в закрытом письме. В публичной газете они не размещаются.';
+ $('idea').textContent=str(f.idea,'Новая идея для ветеринарного центра.');
+ $('ideaCaption').textContent=str(f.idea_visual&&f.idea_visual.caption,'Иллюстрация: экран онлайн-записи.');
+ $('quote').textContent=str(f.editorial&&f.editorial.quote,'«Даже небольшое открытие может изменить твой день».');
+ let items=Array.isArray(f.news_digest)?f.news_digest:[];
+ if(!items.length&&f.news){const v=f.news;items=[typeof v==='string'?{title:v}:{title:v.title,url:v.url}];}
+ $('news').innerHTML=items.map((n)=>{
+  const u=typeof n.url==='string'&&/^https:\/\//.test(n.url)?n.url:'';
+  return '<div class="newsitem"><div class="eyebrow">'+safe(n.category||'Новости')+'</div><h3>'+safe(n.title||'Без названия')+'</h3><div class="source">'+safe(n.source||'')+(n.date?' · '+safe(n.date):'')+'</div><p>'+safe(n.summary||'Читайте подробности в источнике.')+'</p>'+(u?'<a href="'+safe(u)+'" target="_blank" rel="noopener noreferrer">Открыть источник ↗</a>':'')+'</div>';
+ }).join('');
+ setComic(f.comic||{},f.date);
+ $('foot').textContent='Утро Жени · '+f.date+' · Публичная версия без личных данных · Обновлено '+(f.updated_at||'—');
+ }catch(e){ $('stale').innerHTML='<div class="warning">Выпуск пока не загрузился. Попробуйте обновить страницу.</div>';setComic({},'2026-11-05'); }
+}
+weather();load();
 })();
 </script></body></html>
