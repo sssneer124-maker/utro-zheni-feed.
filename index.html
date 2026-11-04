@@ -74,7 +74,7 @@ a{color:#884658} @media(max-width:650px){.mast{padding:24px 14px 34px;min-height
 <section class="section pink"><div class="eyebrow">10 / Маленькая мысль</div><div class="quote" id="quote">«Не каждому утру нужен подвиг. Иногда достаточно хорошего начала».</div></section>
 <div class="goldline"></div>
 <section class="section"><div class="eyebrow">11 / Немного смеха</div><h2>Мини-комикс дня ♡</h2><div class="comicmeta" id="comicstyle">Четыре иллюстрированные сценки · стиль меняется ежедневно</div><div id="comic" class="comicgrid"></div><p class="small" style="margin-top:14px">Персонаж в публичной версии — рисованный образ, не загруженные личные фотографии.</p></section>
-<div class="footer" id="foot">Утро Жени · Веб-газета · Данные обновляются ежедневно</div>
+<div class="small" style="text-align:center;margin-top:16px">Иллюстрации карт: Памела Колман Смит · колода Райдера—Уэйта, 1910 · Wikimedia Commons. Если изображения недоступны, появятся декоративные рисованные карты.</div><div class="footer" id="foot">Утро Жени · Веб-газета · Данные обновляются ежедневно</div>
 </div></article>
 <script>
 (function(){
@@ -84,10 +84,18 @@ const safe=(s)=>String(s===null||s===undefined?'':s).replace(/[&<>"']/g,(c)=>({'
 const str=(s,f='')=>typeof s==='string'?s:f;
 const tarotNames={1:'Маг',2:'Верховная Жрица',3:'Императрица',4:'Император',5:'Иерофант',6:'Влюблённые',7:'Колесница',8:'Сила',9:'Отшельник'};
 const tarotIcons={Маг:'✧','Верховная Жрица':'☾','Императрица':'❀','Император':'♛','Иерофант':'✥','Влюблённые':'♡','Колесница':'✦','Сила':'♌','Отшельник':'✧'};
-function tarotCard(name,number,light){
+function vectorTarotCard(name,number,light){
 const bg=light?'#52273b':'#51203a', trim='#dcb47a', icon=tarotIcons[name]||'✧';
 return '<svg class="tarotpic" viewBox="0 0 160 240" role="img" aria-label="Иллюстрация карты '+safe(name)+'"><defs><linearGradient id="a'+safe(number)+'" x2="1" y2="1"><stop stop-color="'+bg+'"/><stop offset="1" stop-color="#98717c"/></linearGradient></defs><rect x="1" y="1" width="158" height="238" rx="10" fill="url(#a'+safe(number)+')" stroke="'+trim+'" stroke-width="2"/><rect x="9" y="10" width="142" height="220" rx="6" fill="none" stroke="'+trim+'"/><path d="M31 199Q7 147 35 91M129 199Q153 147 125 91" fill="none" stroke="'+trim+'" stroke-width="2"/><path d="M31 131l-12 -17m12 38l-18 -11m15 31l-16 -3M129 131l12 -17m-12 38l18 -11m-15 31l16 -3" stroke="'+trim+'" stroke-width="2"/><circle cx="80" cy="115" r="39" fill="none" stroke="'+trim+'" stroke-width="2"/><text x="80" y="138" font-family="Georgia" font-size="66" fill="#f7d9ae" text-anchor="middle">'+icon+'</text><text x="80" y="33" font-family="Georgia" fill="'+trim+'" font-size="17" text-anchor="middle">'+safe(number)+'</text><text x="80" y="211" font-size="12" font-weight="bold" fill="#f8e6ce" text-anchor="middle">'+safe(name)+'</text></svg>';
 }
+function tarotCard(name,number,light){
+ const cards={'Маг':'01_Magician','Верховная Жрица':'02_High_Priestess','Императрица':'03_Empress','Император':'04_Emperor','Иерофант':'05_Hierophant','Влюблённые':'06_Lovers','Колесница':'07_Chariot','Сила':'08_Strength','Отшельник':'09_Hermit','Колесо Фортуны':'10_Wheel_of_Fortune','Справедливость':'11_Justice','Повешенный':'12_Hanged_Man','Смерть':'13_Death','Умеренность':'14_Temperance','Дьявол':'15_Devil','Башня':'16_Tower','Звезда':'17_Star','Луна':'18_Moon','Солнце':'19_Sun','Суд':'20_Judgement','Мир':'21_World','Шут':'00_Fool'};
+ const svg=vectorTarotCard(name,number,light);
+ const file=cards[name];if(!file)return svg;
+ const url='https://commons.wikimedia.org/wiki/Special:FilePath/RWS_Tarot_'+file+'.jpg?width=280';
+ return '<div class="cardframe"><img class="tarotpic" src="'+url+'" loading="lazy" alt="Карта Таро «'+safe(name)+'», колода Райдера—Уэйта" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><div hidden>'+svg+'</div></div>';
+}
+
 function avatar(i,style){
  const hair=style==='fashion comic'?'#8c4a38':'#9d6145';
  const clothes=style==='cute/chibi'?'#b26283':style==='fashion comic'?'#5a233c':style==='cozy diary'?'#a27780':'#5e4259';
