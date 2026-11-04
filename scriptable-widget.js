@@ -65,6 +65,16 @@ const r=cards.addStack();r.layoutVertically();
 add(r,'✧ ЧИСЛО И АРКАН',9,ROSE,true);
 const number=f&&f.number_day?f.number_day.value:'—';const arc=f&&f.number_day?f.number_day.tarot_name:'';
 add(r,String(number)+' · '+arc,12,INK,true,1);
+w.addSpacer(6);
+// Для Овна: отдельный гороскоп, карта и цифра; без личных данных.
+const aries=f&&f.aries?f.aries:{};
+const aText=aries.horoscope?txt(aries.horoscope.text,68):'Гороскоп Овна появится с новым выпуском.';
+const aTarot=aries.tarot?aries.tarot.name:'Таро';
+const aNum=aries.number_day?aries.number_day.value:'—';
+const aArc=aries.number_day?aries.number_day.tarot_name:'';
+add(w,'♈ ОВЕН · ГОРОСКОП',9,ROSE,true);
+add(w,aText,10,INK,false,1);
+add(w,'✧ '+aTarot+'   ·   '+aNum+' — '+aArc,10,INK,true,1);
 w.addSpacer(5);
 add(w,'♡ ENGLISH OF THE DAY',9,ROSE,true);
 const en=f&&f.english?f.english:{};
