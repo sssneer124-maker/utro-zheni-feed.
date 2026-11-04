@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#FCF8F0"><title>Утро Жени · газета</title>
+<style>
+  *{box-sizing:border-box}body{margin:0;padding:28px 14px;background:#3d1520;color:#34271f;font-family:ui-serif,Georgia,'Times New Roman',serif}
+  article{max-width:720px;margin:0 auto;background:#fcf8f0;border-radius:27px;padding:clamp(24px,5vw,48px);min-height:82vh;box-shadow:0 18px 64px #1b060933}
+  .eyebrow{color:#9f7742;font-size:13px;font-weight:bold;letter-spacing:1.8px;font-family:system-ui,sans-serif}.date{font-size:clamp(45px,8vw,72px);font-weight:700;line-height:1.15;margin:26px 0 0}
+  .meta{font-size:17px;color:#817669;margin-top:5px}h2{font-family:system-ui,sans-serif;font-size:14px;letter-spacing:1px;color:#9f7742;text-transform:uppercase;margin-top:34px}
+  p,li{font-size:19px;line-height:1.48}li{padding:5px 0}ul{padding-left:27px}hr{border:0;border-top:1px solid #dfd1c0;margin:32px 0}footer{font-family:system-ui,sans-serif;font-size:12px;color:#817669}
+  .subtle{color:#817669}a{color:#936636}
+</style>
+</head>
+<body><article>
+  <div class="eyebrow">УТРО ЖЕНИ &nbsp;/&nbsp; DAILY PAPER</div>
+  <div id="date" class="date">Электронная газета</div><div id="meta" class="meta">Лиски · персональный выпуск</div>
+  <h2>Планы и задачи</h2><div id="tasks"><p class="subtle">Проверяю свежий выпуск…</p></div>
+  <h2>Новость дня</h2><p id="news" class="subtle">Нет опубликованной новости</p>
+  <h2>Идея для AlexJen Vet</h2><p id="idea" class="subtle">Нет опубликованной идеи</p>
+  <hr><footer id="foot">Здесь будет появляться новая газета после публикации файла feed.json.</footer>
+</article>
+<script>
+(async function(){
+try {
+  const response=await fetch('feed.json?ts='+Math.floor(Date.now()/1800000),{cache:'no-store'});
+  if(!response.ok)throw new Error('Файл недоступен');
+  const f=await response.json();
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(f.date||'')) throw new Error('Неверная дата');
+  const dt=new Date(f.date+'T12:00:00+03:00');
+  document.getElementById('date').textContent=new Intl.DateTimeFormat('ru-RU',{day:'numeric',month:'long'}).format(dt);
+  document.getElementById('meta').textContent=new Intl.DateTimeFormat('ru-RU',{weekday:'long'}).format(dt)+' · Лиски';
+  const taskArea=document.getElementById('tasks');taskArea.replaceChildren();
+  const tasks=Array.isArray(f.tasks)?f.tasks:[];
+  if(tasks.length){const ul=document.createElement('ul');tasks.forEach(v=>{const li=document.createElement('li');li.textContent=typeof v==='string'?v:v.title||'';ul.append(li)});taskArea.append(ul)}
+  else{const p=document.createElement('p');p.className='subtle';p.textContent=f.status==='setup'?'Публикация настраивается':'Личные планы остаются в закрытой газете на почте';taskArea.append(p)}
+  const news=typeof f.news==='string'?f.news:f.news?.title||'';document.getElementById('news').textContent=news||'Нет опубликованной новости';
+  document.getElementById('idea').textContent=f.idea||'Нет опубликованной идеи';
+  document.getElementById('foot').textContent='Утро Жени · '+(f.updated_at?'Обновлено: '+f.updated_at:'Ожидается первый выпуск');
+}catch(e){document.getElementById('tasks').textContent='Не удалось загрузить газету: '+e.message}
+})();
+</script></body></html>
