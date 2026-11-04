@@ -109,7 +109,7 @@ if (weather) {
   x = r.addText(`от ${weather.min}° до ${weather.max}°`); x.font = Font.systemFont(10); x.textColor = MUTED;
 } else addText(w, (feed && feed.weather) || 'Погода пока недоступна', 13, INK, true, 2);
 w.addSpacer(15);
-addText(w, 'ПЛАНЫ ИЗ NOTION', 10, GOLD, true);
+addText(w, 'ПЛАНЫ ДНЯ', 10, GOLD, true);
 w.addSpacer(5);
 if (!Keychain.contains(KEY)) {
   addText(w, 'Открой Scriptable и запусти скрипт, чтобы указать адрес газеты.', 12, INK, false, 4);
@@ -118,7 +118,7 @@ if (!Keychain.contains(KEY)) {
 } else if (feed.status === 'setup') {
   addText(w, 'Сайт подготовлен. Публикация выпусков ещё не запущена.', 12, INK, false, 3);
 } else if (!feed.tasks.length) {
-  addText(w, 'В этом выпуске нет опубликованных дел.', 12, INK, false, 2);
+  addText(w, 'Личные планы — только в газете на почте.', 12, INK, false, 2);
 } else {
   for (const item of feed.tasks) {
     addText(w, '□  ' + item, 12, INK, false, 2);
